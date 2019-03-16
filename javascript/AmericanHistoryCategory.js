@@ -9,7 +9,7 @@ var gameRunning = false;
 var isTimerRunning = false;
 var timer = 15;
 var intervalId;
-var count;
+var count = 0;
 
 //...create question objects/arrays.............................................
 var historyQuestions = [
@@ -42,18 +42,30 @@ var historyQuestions = [
 
 //...Choose a current question..................................................
 function chooseCategory () {
-    currentQuestion = historyQuestions[0];
+    currentQuestion = historyQuestions[count];
+    currentQuestionLength = historyQuestions.length;
     console.log(currentQuestion.question);
 }
 
-//...question Count..........................................................
-function 
+//...question Count/next question..........................................................
+function nextQuestion() {
+if (currentQuestionLength === count) {
+        finalscore();
+    } else {
+    count++;
+    chooseCategory();
+    displayQuestion();
+    console.log(count);
+}
+
+}
+
 
 
 
 
 //...display question.............................................................
-function displayQuestion() {
+function displayQuestion() { 
     $(".questionCard").text(currentQuestion.question);
     $(".answerA").html("<h1>A.</h1><p>" + currentQuestion.choices[0] + "</p>");
     $(".answerB").html("<h1>B.</h1><p>" + currentQuestion.choices[1] + "</p>");
@@ -62,7 +74,7 @@ function displayQuestion() {
     // intervalId = setInterval(questionTimer, 1000);
     isTimerRunning = true;
 
-}
+};
 
 
 
@@ -72,9 +84,11 @@ $(".answerA").click(function() {
     selectedAnswer = 'A';
     if (selectedAnswer === currentQuestion.validAnswer) {
       correct();
+      nextQuestion();
     }
     if (selectedAnswer != currentQuestion.validAnswer) {
       incorrect();
+      nextQuestion();
     }
   });
 
@@ -82,9 +96,11 @@ $(".answerA").click(function() {
     selectedAnswer = 'B';
     if (selectedAnswer === currentQuestion.validAnswer) {
       correct();
+      nextQuestion();
     }
     if (selectedAnswer != currentQuestion.validAnswer) {
       incorrect();
+      nextQuestion();
     }
   });
 
@@ -92,19 +108,23 @@ $(".answerA").click(function() {
     selectedAnswer = 'C';
     if (selectedAnswer === currentQuestion.validAnswer) {
       correct();
+      nextQuestion();
     }
     if (selectedAnswer != currentQuestion.validAnswer) {
       incorrect();
+      nextQuestion();
     }
   });
 
   $(".answerD").click(function() {
     selectedAnswer = 'D';
-    if (selectedAnswer === currentQuestion.validAnswer[0]) {
+    if (selectedAnswer === currentQuestion.validAnswer) {
       correct();
+      nextQuestion();
     }
-    if (selectedAnswer != currentQuestion.validAnswer[0]) {
+    if (selectedAnswer != currentQuestion.validAnswer) {
       incorrect();
+      nextQuestion();
     }
   });
 
@@ -120,8 +140,10 @@ function correct() {
     score--;
     $(".scoreCard").html("<h1>Score: " + score + "</h1>");
   }
-  
 
+function finalscore() {
+    alert("Final Score: " + score + "!");
+}
 
 chooseCategory();
 displayQuestion();
