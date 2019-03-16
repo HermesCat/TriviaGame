@@ -44,15 +44,13 @@ var historyQuestions = [
 function chooseCategory () {
     currentQuestion = historyQuestions[count];
     currentQuestionLength = historyQuestions.length;
-    console.log(currentQuestion.question);
 }
 
 //...question Count/next question..........................................................
 function nextQuestion() {
 if (currentQuestionLength === count) {
-        finalscore();
+  alert("Final Score: " + score + "!");
     } else {
-    count++;
     chooseCategory();
     displayQuestion();
     console.log(count);
@@ -132,18 +130,18 @@ $(".answerA").click(function() {
 function correct() {
     alert("Correct!");
     score++;
+    count++;
     $(".scoreCard").html("<h1>Score: " + score + "</h1>");
   }
   
   function incorrect() {
     alert("Wrong!");
     score--;
+    count++;
     $(".scoreCard").html("<h1>Score: " + score + "</h1>");
   }
 
-function finalscore() {
-    alert("Final Score: " + score + "!");
-}
+
 
 chooseCategory();
 displayQuestion();
