@@ -11,6 +11,7 @@ var timer = 15;
 var intervalId;
 var count = 0;
 
+
 //...create question objects/arrays.............................................
 var historyQuestions = [
   {
@@ -69,12 +70,25 @@ function displayQuestion() {
     $(".answerB").html("<h1>B.</h1><p>" + currentQuestion.choices[1] + "</p>");
     $(".answerC").html("<h1>C.</h1><p>" + currentQuestion.choices[2] + "</p>");
     $(".answerD").html("<h1>D.</h1><p>" + currentQuestion.choices[3] + "</p>");
-    // intervalId = setInterval(questionTimer, 1000);
     isTimerRunning = true;
+   
+   
 
 };
 
-
+//...questionTimer.......................................
+function questionTimer() {
+    intervalId = setInterval(questionTimer, 1000);
+    $("#timer-display").text(`Time: ${timer}`);
+    timer--;
+    if(timer < 0){
+    clearInterval(intervalId);
+    isTimerRunning = false;
+    setTimeout(nextQuestion, 3000);
+    incorrect();
+    nextQuestion();
+   }
+}
 
 
 //....on click functions check............................................................
@@ -126,7 +140,7 @@ $(".answerA").click(function() {
     }
   });
 
-//...create a function to add to the score
+//...create a function to add to the score....................................
 function correct() {
     alert("Correct!");
     score++;
