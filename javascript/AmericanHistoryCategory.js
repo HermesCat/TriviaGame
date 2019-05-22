@@ -10,6 +10,7 @@ var isTimerRunning = false;
 var timer = 15;
 var intervalId;
 var count = 0;
+var timer = 5;
 
 
 //...create question objects/arrays.............................................
@@ -70,6 +71,8 @@ function displayQuestion() {
     $(".answerB").html("<h1>B.</h1><p>" + currentQuestion.choices[1] + "</p>");
     $(".answerC").html("<h1>C.</h1><p>" + currentQuestion.choices[2] + "</p>");
     $(".answerD").html("<h1>D.</h1><p>" + currentQuestion.choices[3] + "</p>");
+    $(".questionNumber").html(`<h1>Question ${count + 1}:</h1>`)
+    questionTimer();
     isTimerRunning = true;
    
    
@@ -77,18 +80,17 @@ function displayQuestion() {
 };
 
 //...questionTimer.......................................
-function questionTimer() {
-    intervalId = setInterval(questionTimer, 1000);
-    $("#timer-display").text(`Time: ${timer}`);
-    timer--;
-    if(timer < 0){
-    clearInterval(intervalId);
-    isTimerRunning = false;
-    setTimeout(nextQuestion, 3000);
-    incorrect();
-    nextQuestion();
-   }
-}
+// function questionTimer() {
+//   $("#timer-display").text(`${timer}`);
+//     timer--;
+//     if(timer < 0){
+//     clearInterval(intervalId);
+//     isTimerRunning = false;
+//     setTimeout(nextQuestion, 3000);
+//     incorrect();
+//     nextQuestion();
+//    }
+// }
 
 
 //....on click functions check............................................................
